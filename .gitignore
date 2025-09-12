@@ -14,3 +14,32 @@ export_credentials.cfg
 .mono/
 data_*/
 mono_crash.*.json
+
+# IntelliJ / Rider
+/.idea
+*.iml
+out/
+
+# Rider will generate these when you build
+bin/
+obj/
+
+# VSCODE
+*.suo
+*.user
+.vs/
+[Bb]in/
+[Oo]bj/
+_UpgradeReport_Files/
+[Pp]ackages/
+
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# CUSTOM
+/Export/*
+/Temp/
+
+# User specific
+/.vscode/
