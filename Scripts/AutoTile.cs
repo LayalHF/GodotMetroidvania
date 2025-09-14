@@ -1,10 +1,13 @@
 using Godot;
-using System;
-[Tool]
-public class AutoTile : TileSet
+
+namespace MetroidvaniaProject.Scripts
 {
-    public override bool _IsTileBound(int drawnId, int neighborId)
+    [Tool]
+    public class AutoTile : TileSet
     {
-        return GetTilesIds().Contains(neighborId);
+        public override bool _IsTileBound(int drawnId, int neighborId)
+        {
+            return GetTilesIds().Contains(neighborId);
+        }
     }
 }
