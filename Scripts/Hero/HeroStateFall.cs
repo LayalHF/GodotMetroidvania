@@ -10,7 +10,7 @@ namespace MetroidvaniaProject.Scripts.Hero
       private IHeroState Fall(HeroStateMachine hero, float deltatime)
       {
          // Enable Snapping so the Hero will be able to walk on slopes
-         hero.EnableSnap();
+         hero.HeroMoveLogic.EnableSnap();
       
          hero.HeroAnimations.Play("HeroFall");
 

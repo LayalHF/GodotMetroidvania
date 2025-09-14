@@ -14,7 +14,12 @@ namespace MetroidvaniaProject.Scripts.Hero
             if (hero.IsOnFloor())
             {
                 // enable snap so the hero will snap to the slopes
-                hero.EnableSnap();
+                hero.HeroMoveLogic.EnableSnap();
+
+                if (Input.IsActionJustPressed("Jump") && Input.IsActionJustPressed("Down"))
+                {
+                    return hero.StateSlide;
+                }
                 
                 if (Input.IsActionJustPressed("Jump"))
                 {

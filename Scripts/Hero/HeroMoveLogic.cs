@@ -6,12 +6,12 @@ namespace MetroidvaniaProject.Scripts.Hero
     {
         private float Gravity = 1500; //Gravity Strength pulling the Hero towards the ground
         private float MovementAccelerations = 20; // The movement acceleration of the Hero
-        private float MaxMovementSpeed = 200; // The max movement speed of the Hero
+        public float MaxMovementSpeed = 200; // The max movement speed of the Hero
         private float Friction = 1.0f; // Friction for the Horizontal movement on the ground
         public Vector2 SnapVector;
         public Vector2 Velocity = Vector2.Zero; // The direction the Hero is moving in
-        HeroStateMachine Hero;
-
+        private HeroStateMachine Hero;
+        public bool MovementDisabled = false;
         public HeroMoveLogic(HeroStateMachine hero)
         {
             Hero = hero;
@@ -35,15 +35,18 @@ namespace MetroidvaniaProject.Scripts.Hero
         {
             float leftDirectionStrength = Input.GetActionStrength("MoveLeft");
             float rightDirectionStrength = Input.GetActionStrength("MoveRight");
+            
+            if (!MovementDisabled)
+            {
+                UpdateVelocity(leftDirectionStrength, rightDirectionStrength);
 
-            UpdateVelocity(leftDirectionStrength, rightDirectionStrength);
+                //Update left & right movement
+                UpdateRightMovement(leftDirectionStrength, rightDirectionStrength);
+                UpdateLeftMovement(leftDirectionStrength, rightDirectionStrength);
 
-            //Update left & right movement
-            UpdateRightMovement(leftDirectionStrength, rightDirectionStrength);
-            UpdateLeftMovement(leftDirectionStrength, rightDirectionStrength);
-
-            // update the isMoving State
-            UpdateIsMoving(leftDirectionStrength, rightDirectionStrength);
+                // update the isMoving State
+                UpdateIsMoving(leftDirectionStrength, rightDirectionStrength);
+            }
         }
 
         private void UpdateVelocity(float leftDirectionStrength, float rightDirectionStrength)
@@ -139,5 +142,15 @@ namespace MetroidvaniaProject.Scripts.Hero
             // apply gravity to the hero
             Velocity.y += Gravity * delta;
         }
+            public void EnableSnap()
+            {
+                SnapVector = new Vector2(0, 15);
+            }
+        
+            public void DisableSnap()
+            {
+                SnapVector = Vector2.Zero;
+            }
     }
+
 }

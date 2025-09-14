@@ -9,9 +9,11 @@ namespace MetroidvaniaProject.Scripts.Hero
         public HeroStateFall StateFall = new HeroStateFall(); // the Fall state
         public HeroStateJump StateJump = new HeroStateJump(); // the Jump state
         public HeroStateInitJump StateInitJump = new HeroStateInitJump(); // the Jump state
+        public HeroStateSlide StateSlide = new HeroStateSlide(); // the slide state
 
         public HeroMoveLogic HeroMoveLogic;
-
+        public HeroCollisionShapes HeroCollisionShapes;
+        public HeroTimers HeroTimers;
         public AnimatedSprite HeroAnimations; // The Hero Animations
         private IHeroState CurrentState; // The current state the Hero is in
         private bool IsInitialized = false; // Boolean to keep track of if the state machine is properly initialized
@@ -35,6 +37,19 @@ namespace MetroidvaniaProject.Scripts.Hero
             var initOk = true; // bool to keep track of in the state machine was initialized ok
             CurrentState = StateIdle; // Set the starting state to idle
             HeroMoveLogic = new HeroMoveLogic(this); // Initialize Hero Move Logic
+            
+            HeroCollisionShapes = new HeroCollisionShapes(this, ref initOk);
+            if (!initOk)
+            {
+                return false;
+            }
+
+            HeroTimers = new HeroTimers(this, ref initOk);
+            if (!initOk)
+            {
+                return false;
+            }
+            
             initOk = GetHeroAnimationsNode(); //Get the hero animations node
             return initOk;
         }
@@ -60,15 +75,7 @@ namespace MetroidvaniaProject.Scripts.Hero
             CurrentState = CurrentState.DoState(this, delta);
         }
 
-        public void EnableSnap()
-        {
-            HeroMoveLogic.SnapVector = new Vector2(0, 15);
-        }
 
-        public void DisableSnap()
-        {
-            HeroMoveLogic.SnapVector = Vector2.Zero;
-        }
 
         public override void _PhysicsProcess(float delta)
         {
