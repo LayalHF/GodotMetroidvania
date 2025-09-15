@@ -10,6 +10,7 @@ namespace MetroidvaniaProject.Scripts.Hero
         public HeroStateJump StateJump = new HeroStateJump(); // the Jump state
         public HeroStateInitJump StateInitJump = new HeroStateInitJump(); // the Jump state
         public HeroStateSlide StateSlide = new HeroStateSlide(); // the slide state
+        public HeroStateSliderStandUp StateSlideStandUp = new HeroStateSliderStandUp(); // the slide stand up state
 
         public HeroMoveLogic HeroMoveLogic;
         public HeroCollisionShapes HeroCollisionShapes;
@@ -74,8 +75,6 @@ namespace MetroidvaniaProject.Scripts.Hero
             // Update the current state
             CurrentState = CurrentState.DoState(this, delta);
         }
-
-
 
         public override void _PhysicsProcess(float delta)
         {

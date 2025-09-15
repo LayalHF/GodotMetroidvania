@@ -11,7 +11,7 @@ radius = 9.5
 height = 10.0
 
 [sub_resource type="RectangleShape2D" id=30]
-extents = Vector2( 11, 7.5 )
+extents = Vector2( 11, 5.75 )
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 1 )
@@ -169,12 +169,12 @@ position = Vector2( -1, 2.5 )
 shape = SubResource( 1 )
 
 [node name="CollisionShapeSlide" type="CollisionShape2D" parent="."]
-position = Vector2( 3, 10 )
+position = Vector2( 3, 11.75 )
 shape = SubResource( 30 )
 
 [node name="HeroAnimations" type="AnimatedSprite" parent="."]
 frames = SubResource( 6 )
-animation = "HeroSlideStandUp"
+animation = "HeroSlide"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
@@ -193,5 +193,6 @@ drag_margin_top = 0.1
 wait_time = 0.5
 
 [node name="SlideStandUpTimer" type="Timer" parent="Timers"]
+wait_time = 0.25
 
 [connection signal="animation_finished" from="HeroAnimations" to="." method="HeroAnimationDone"]
