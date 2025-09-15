@@ -14,15 +14,24 @@ namespace MetroidvaniaProject.Scripts.Hero
       
          hero.HeroAnimations.Play("HeroFall");
 
-         if (hero.IsOnFloor())
+         // if hero is falling next to a ledge
+         if (hero.StateLedgeGrab.CanHeroLedgeGrab(hero))
          {
+            return hero.StateLedgeGrab;
+         }
+         // if the hero is landing on the ground/floor
+         if(hero.IsOnFloor())
+         {
+            // if the hero is moving
             if (hero.IsMoving)
             {
                return hero.StateRun;
             }
+            // if not, return the idle state
             return hero.StateIdle;
          }
-
+         
+         // if no other state was triggered, continue the falling
          return hero.StateFall;
       }
    }

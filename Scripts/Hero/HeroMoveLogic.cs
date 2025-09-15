@@ -12,6 +12,7 @@ namespace MetroidvaniaProject.Scripts.Hero
         public Vector2 Velocity = Vector2.Zero; // The direction the Hero is moving in
         private HeroStateMachine Hero;
         public bool MovementDisabled = false;
+        public bool GravityDisabled = false;
         public HeroMoveLogic(HeroStateMachine hero)
         {
             Hero = hero;
@@ -89,6 +90,10 @@ namespace MetroidvaniaProject.Scripts.Hero
                
                 }
                 Hero.HeroAnimations.FlipH = false;
+                
+                // reset the ledge-grab ray casts
+                Hero.HeroRaycasts.LedgeGrabRayCastTileAbove.RotationDegrees = 0;
+                Hero.HeroRaycasts.LedgeGrabRayCastTileHead.RotationDegrees = 0;
             }
         }
     
@@ -109,6 +114,10 @@ namespace MetroidvaniaProject.Scripts.Hero
                
                 }
                 Hero.HeroAnimations.FlipH = true;
+                
+                // reset the ledge-grab ray casts
+                Hero.HeroRaycasts.LedgeGrabRayCastTileAbove.RotationDegrees = -180;
+                Hero.HeroRaycasts.LedgeGrabRayCastTileHead.RotationDegrees = -180;
             }
         }
 
@@ -139,8 +148,11 @@ namespace MetroidvaniaProject.Scripts.Hero
 
         public void ApplyGravity(float delta)
         {
-            // apply gravity to the hero
-            Velocity.y += Gravity * delta;
+            if (!GravityDisabled)
+            {
+                // apply gravity to the hero
+                Velocity.y += Gravity * delta;
+            }
         }
             public void EnableSnap()
             {

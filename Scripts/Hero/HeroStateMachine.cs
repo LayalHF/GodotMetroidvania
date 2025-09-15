@@ -11,10 +11,13 @@ namespace MetroidvaniaProject.Scripts.Hero
         public HeroStateInitJump StateInitJump = new HeroStateInitJump(); // the Jump state
         public HeroStateSlide StateSlide = new HeroStateSlide(); // the slide state
         public HeroStateSliderStandUp StateSlideStandUp = new HeroStateSliderStandUp(); // the slide stand up state
+        public HeroStateLedgeGrab StateLedgeGrab = new HeroStateLedgeGrab(); // the ledge-grab state
 
         public HeroMoveLogic HeroMoveLogic;
         public HeroCollisionShapes HeroCollisionShapes;
         public HeroTimers HeroTimers;
+        public Hero2DRayCast HeroRaycasts;
+
         public AnimatedSprite HeroAnimations; // The Hero Animations
         private IHeroState CurrentState; // The current state the Hero is in
         private bool IsInitialized = false; // Boolean to keep track of if the state machine is properly initialized
@@ -46,6 +49,12 @@ namespace MetroidvaniaProject.Scripts.Hero
             }
 
             HeroTimers = new HeroTimers(this, ref initOk);
+            if (!initOk)
+            {
+                return false;
+            }
+            
+            HeroRaycasts = new Hero2DRayCast(this, ref initOk);
             if (!initOk)
             {
                 return false;

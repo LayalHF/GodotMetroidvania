@@ -7,6 +7,9 @@ namespace MetroidvaniaProject.Scripts.Hero
       private HeroStateMachine Hero;
       public Timer SlideTimer;
       public Timer SlideStandUpTimer;
+      
+      public Timer LedgeFallTimer;
+      
       private bool TimersInitialized;     // flag to keep track of if the timers have been properly initialized
 
       public HeroTimers(HeroStateMachine hero, ref bool initOk)
@@ -25,6 +28,12 @@ namespace MetroidvaniaProject.Scripts.Hero
          }
 
          SlideStandUpTimer = GetTimerNode("SlideStandUpTimer");
+         if(!TimersInitialized)
+         {
+            return false;
+         }
+         
+         LedgeFallTimer = GetTimerNode("LedgeFallTimer");
          if(!TimersInitialized)
          {
             return false;
