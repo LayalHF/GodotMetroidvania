@@ -12,7 +12,9 @@ namespace MetroidvaniaProject.Scripts.Hero
         public HeroStateSlide StateSlide = new HeroStateSlide(); // the slide state
         public HeroStateSliderStandUp StateSlideStandUp = new HeroStateSliderStandUp(); // the slide stand up state
         public HeroStateLedgeGrab StateLedgeGrab = new HeroStateLedgeGrab(); // the ledge-grab state
+        public HeroStateLedgeClimb StateLedgeClimb = new HeroStateLedgeClimb(); // the ledge-climb state
 
+        
         public HeroMoveLogic HeroMoveLogic;
         public HeroCollisionShapes HeroCollisionShapes;
         public HeroTimers HeroTimers;

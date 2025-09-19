@@ -80,9 +80,9 @@ namespace MetroidvaniaProject.Scripts.Hero
 
         public void ChangeCollisionShapesToSlide()
         {
-            Head.Disabled = true;
-            Body.Disabled = true;
-            Slide.Disabled = false;
+            Head.Disabled = true;       // disable hero head collision shape
+            Body.Disabled = true;       // disable hero body collision shape
+            Slide.Disabled = false;     // enable hero head collision shape
         }
     
         public void ChangeCollisionShapesToStanding()
@@ -97,6 +97,13 @@ namespace MetroidvaniaProject.Scripts.Hero
             Head.Disabled = false;
             Body.Disabled = true;
             Slide.Disabled = false;
+        }
+        
+        public void DisableAllCollisionShapes()
+        {
+            Head.Disabled = true;
+            Body.Disabled = true;
+            Slide.Disabled = true;
         }
     }
 }

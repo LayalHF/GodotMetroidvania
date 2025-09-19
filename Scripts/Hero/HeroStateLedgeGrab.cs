@@ -39,14 +39,28 @@ namespace MetroidvaniaProject.Scripts.Hero
 
         public IHeroState LedgeGrab()
         {
+            if (IsHangingInEmptyAir())
+            {
+                return Hero.StateFall;
+            }
+            
             Hero.HeroMoveLogic.GravityDisabled = true; // disable gravity
             Hero.HeroMoveLogic.MovementDisabled = true; // disable movement
             Hero.HeroMoveLogic.Velocity.y = 0; // Reset gravity velocity to 0, so the hero won't fall at the previous accumulated gravity
 
+            if (Input.IsActionJustPressed("Up"))
+            {
+                return Hero.StateLedgeClimb;
+            }
+
+            
             if (Input.IsActionJustPressed("Down"))
             {
                 FallAfterLedgeGrab = true;      // flag that hero just released the ledge
                 Hero.HeroTimers.LedgeFallTimer.Start();
+                Hero.HeroMoveLogic.GravityDisabled = false;     // enable gravity
+                Hero.HeroMoveLogic.MovementDisabled = false; // enable movement
+                return Hero.StateFall;
             }
             
             Hero.HeroAnimations.Play("HeroLedgeGrab");
@@ -58,14 +72,29 @@ namespace MetroidvaniaProject.Scripts.Hero
         // therefore, we pass in the hero as reference, to not get a null-exception
         public bool CanHeroLedgeGrab(HeroStateMachine hero)
         {
+            // if hero cannot perform a ledge-grab, meaning he just performed one, the time has to timeout first
+            if (FallAfterLedgeGrab)
+            {
+                return false;       // return false, the hero is not allowed to ledge-grab
+            }
             // if the ray above the hero's head is not colliding and the ray next to the hero is colliding
-            if (!hero.HeroRaycasts.LedgeGrabRayCastTileAbove.IsColliding() &&
-                hero.HeroRaycasts.LedgeGrabRayCastTileHead.IsColliding())
+            if (!hero.HeroRaycasts.LedgeGrabRayCastTileAbove.IsColliding() && hero.HeroRaycasts.LedgeGrabRayCastTileHead.IsColliding())
             {
                 return true; // the hero can ledge grab
             }
 
             return false;
         }
+
+        public bool IsHangingInEmptyAir()
+        {
+            if (!Hero.HeroRaycasts.LedgeGrabRayCastTileAbove.IsColliding() && !Hero.HeroRaycasts.LedgeGrabRayCastTileHead.IsColliding())
+            {
+                return true;
+            }
+            
+            return false;
+        }
+        
     }
 }

@@ -5,10 +5,14 @@ namespace MetroidvaniaProject.Scripts.Hero
    public class HeroTimers
    {
       private HeroStateMachine Hero;
-      public Timer SlideTimer;
-      public Timer SlideStandUpTimer;
       
-      public Timer LedgeFallTimer;
+      public Timer SlideTimer;     
+      
+      public Timer SlideStandUpTimer;     // stand up timer - used to switch to the idle state
+      
+      public Timer LedgeFallTimer;     // time that must pass before the ledge-grabbing again
+      
+      public Timer LedgeClimbTimer;    // hero ledge climb timer - timer for how long it takes for hero to climb a ledge
       
       private bool TimersInitialized;     // flag to keep track of if the timers have been properly initialized
 
@@ -34,6 +38,12 @@ namespace MetroidvaniaProject.Scripts.Hero
          }
          
          LedgeFallTimer = GetTimerNode("LedgeFallTimer");
+         if(!TimersInitialized)
+         {
+            return false;
+         }
+         
+         LedgeClimbTimer = GetTimerNode("LedgeClimbTimer");
          if(!TimersInitialized)
          {
             return false;
