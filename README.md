@@ -15,7 +15,7 @@ JetBrains Rider
 
 ## How to Play?
 
-1. open Godot editor
+1. Open Godot editor
 2. Start the Main scene
 
 
