@@ -14,6 +14,8 @@ namespace MetroidvaniaProject.Scripts.Hero
       
       public Timer LedgeClimbTimer;    // hero ledge climb timer - timer for how long it takes for hero to climb a ledge
       
+      public Timer AttackTimer;    // timer for standard attack durations
+      
       private bool TimersInitialized;     // flag to keep track of if the timers have been properly initialized
 
       public HeroTimers(HeroStateMachine hero, ref bool initOk)
@@ -44,6 +46,12 @@ namespace MetroidvaniaProject.Scripts.Hero
          }
          
          LedgeClimbTimer = GetTimerNode("LedgeClimbTimer");
+         if(!TimersInitialized)
+         {
+            return false;
+         }
+         
+         AttackTimer = GetTimerNode("AttackTimer");
          if(!TimersInitialized)
          {
             return false;

@@ -13,6 +13,8 @@ namespace MetroidvaniaProject.Scripts.Hero
         private HeroStateMachine Hero;
         public bool MovementDisabled = false;
         public bool GravityDisabled = false;
+        
+        public bool IsMoving = false; // to keep track if the Hero is moving
         public HeroMoveLogic(HeroStateMachine hero)
         {
             Hero = hero;
@@ -23,7 +25,7 @@ namespace MetroidvaniaProject.Scripts.Hero
             // Move the Hero according to controller input
             Velocity = Hero.MoveAndSlideWithSnap(Velocity, SnapVector, Vector2.Up, stopOnSlope: true);
 
-            if (!Hero.IsMoving)
+            if (!IsMoving)
             {
                 if (IsHeroOnSlope() || Hero.IsOnFloor())
                 {
@@ -126,11 +128,11 @@ namespace MetroidvaniaProject.Scripts.Hero
             // if there is no movement in the left or the right directions
             if (leftDirectionStrength is 0 && rightDirectionStrength is 0)
             {
-                Hero.IsMoving = false;
+                IsMoving = false;
             }
             else
             {
-                Hero.IsMoving = true;
+                IsMoving = true;
             }
         }
 

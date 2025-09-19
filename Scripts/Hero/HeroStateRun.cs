@@ -28,7 +28,7 @@ namespace MetroidvaniaProject.Scripts.Hero
             else if (hero.IsOnFloor())
             {
                 // if the hero is not moving
-                if (!hero.IsMoving)
+                if (!hero.HeroMoveLogic.IsMoving)
                 {
                     // set the state to idle
                     return hero.StateIdle;

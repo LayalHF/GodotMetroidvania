@@ -34,7 +34,7 @@ namespace MetroidvaniaProject.Scripts.Hero
             hero.StateJump.ResetJumpCounter();
             
             // if the hero is moving
-            if (hero.IsMoving)
+            if (hero.HeroMoveLogic.IsMoving)
             {
                return hero.StateRun;
             }

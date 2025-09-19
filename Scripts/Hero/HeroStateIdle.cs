@@ -26,9 +26,14 @@ namespace MetroidvaniaProject.Scripts.Hero
                     return hero.StateInitJump;
                 }
                 
+                if (Input.IsActionJustPressed("Attack"))
+                {
+                    return hero.StateAttack;
+                }
+                
                 hero.HeroAnimations.Play("HeroIdle");
 
-                if (hero.IsMoving)
+                if (hero.HeroMoveLogic.IsMoving)
                 {
                     return hero.StateRun;
                 }

@@ -14,7 +14,7 @@ namespace MetroidvaniaProject.Scripts.Hero
         public HeroStateLedgeGrab StateLedgeGrab = new HeroStateLedgeGrab(); // the ledge-grab state
         public HeroStateLedgeClimb StateLedgeClimb = new HeroStateLedgeClimb(); // the ledge-climb state
         public HeroStateGlide StateGlide = new HeroStateGlide(); // the Glide state
-
+        public HeroStateAttack StateAttack = new HeroStateAttack(); // the attack state
         
         public HeroMoveLogic HeroMoveLogic;
         public HeroCollisionShapes HeroCollisionShapes;
@@ -24,7 +24,6 @@ namespace MetroidvaniaProject.Scripts.Hero
         public AnimatedSprite HeroAnimations; // The Hero Animations
         public IHeroState CurrentState; // The current state the Hero is in
         private bool IsInitialized = false; // Boolean to keep track of if the state machine is properly initialized
-        public bool IsMoving = false; // to keep track if the Hero is moving
 
         public string LastPlayedHeroAnimation = string.Empty;
 
