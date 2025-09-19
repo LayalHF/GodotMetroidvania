@@ -19,5 +19,6 @@ JetBrains Rider
 - Slide: Alt
 - Jump: Space
 
+
 Current Assets used from 'rvross' on itch.io (https://rvros.itch.io/animated-pixel-hero). \
 PS: I am planning to create my own assets after I finish and polish the prototype :]
