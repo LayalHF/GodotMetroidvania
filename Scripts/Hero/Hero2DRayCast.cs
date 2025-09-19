@@ -8,6 +8,8 @@ namespace MetroidvaniaProject.Scripts.Hero
         private bool RaycastsInitialized = false;       // flag to keep track of if the raycast have been properly initialized
         public RayCast2D LedgeGrabRayCastTileAbove;     // The raycast to check if a tile is above the hero
         public RayCast2D LedgeGrabRayCastTileHead;      // The raycast to check if a tile is next to the head
+        public RayCast2D LeftWallRayCast;     // The raycast to check if there is a wall to the left
+        public RayCast2D RightWallRayCast;      // The raycast to check if there is a wall to the right
 
         public Hero2DRayCast(HeroStateMachine hero, ref bool initOk)
         {
@@ -24,6 +26,18 @@ namespace MetroidvaniaProject.Scripts.Hero
                 return false;
             }
             LedgeGrabRayCastTileHead = GetRaycastNode("LedgeGrabRayCastTileHead");
+            if (!RaycastsInitialized)
+            {
+                return false;
+            }
+            
+            LeftWallRayCast = GetRaycastNode("LeftWallRayCast");
+            if (!RaycastsInitialized)
+            {
+                return false;
+            }
+            
+            RightWallRayCast = GetRaycastNode("RightWallRayCast");
             if (!RaycastsInitialized)
             {
                 return false;

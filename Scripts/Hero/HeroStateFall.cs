@@ -44,6 +44,10 @@ namespace MetroidvaniaProject.Scripts.Hero
          
          if (Input.IsActionJustPressed("Jump"))
          {
+            if (hero.StateJump.CanWallJump(hero))
+            {
+               return hero.StateInitJump;
+            }
             if (hero.StateJump.CanJumpAgainInAir())
             {
                return hero.StateInitJump;   

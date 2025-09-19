@@ -80,5 +80,21 @@ namespace MetroidvaniaProject.Scripts.Hero
             
             return false;
         }
+
+        public bool CanWallJump(HeroStateMachine hero)
+        {
+            // if there is a wall left to the player and the hero is facing the right side(non-flipped sprite)
+            if (hero.HeroRaycasts.LeftWallRayCast.IsColliding() && !hero.HeroAnimations.FlipH)
+            {
+                return true;        // return true, the hero can wall jump
+            }
+            // if there is a wall right to the player and the hero is facing the left side(flipped sprite)
+            if (hero.HeroRaycasts.RightWallRayCast.IsColliding() && hero.HeroAnimations.FlipH)
+            {
+                return true;
+            }
+            return false;
+        }
+   
     }
 }
