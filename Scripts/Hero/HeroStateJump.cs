@@ -4,9 +4,12 @@ namespace MetroidvaniaProject.Scripts.Hero
 {
     public class HeroStateJump : IHeroState
     {
-        private const float CutJumpThreshold = -200.0f; // The threshold for cutting a jump start
+        private const float CutJumpThreshold = -200.0f; // the threshold for cutting a jump start
         private const float JumpForceAfterJumpCutShort = -320.0f; // the jump force after a jump has been cut short
-
+        private int MaxJumps = 2;       // maximum number of jumps the hero can perform in-air
+        private int JumpCount = 0;      // the number of jumps that has been performed in-air
+        
+        
         public IHeroState DoState(HeroStateMachine hero, float deltatime)
         {
             return Jump(hero, deltatime);
@@ -49,10 +52,33 @@ namespace MetroidvaniaProject.Scripts.Hero
             }
             else if (hero.IsOnFloor())
             {
+                ResetJumpCounter();
                 return hero.StateIdle;
             }
 
             return hero.StateJump;
+        }
+
+        public void SetMaxJump(int numJumps)
+        {
+            MaxJumps = numJumps;       // set the new number of max jumps
+        }
+        
+        public void ResetJumpCounter()
+        {
+            JumpCount = 0;     // reset jump counter to 0
+        }
+
+        public bool CanJumpAgainInAir()
+        {
+            JumpCount++;
+
+            if (JumpCount < MaxJumps)
+            {
+                return true;
+            }
+            
+            return false;
         }
     }
 }

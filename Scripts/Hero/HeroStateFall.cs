@@ -31,6 +31,8 @@ namespace MetroidvaniaProject.Scripts.Hero
          // if the hero is landing on the ground/floor
          if(hero.IsOnFloor())
          {
+            hero.StateJump.ResetJumpCounter();
+            
             // if the hero is moving
             if (hero.IsMoving)
             {
@@ -38,6 +40,14 @@ namespace MetroidvaniaProject.Scripts.Hero
             }
             // if not, return the idle state
             return hero.StateIdle;
+         }
+         
+         if (Input.IsActionJustPressed("Jump"))
+         {
+            if (hero.StateJump.CanJumpAgainInAir())
+            {
+               return hero.StateInitJump;   
+            }
          }
          
          // if no other state was triggered, continue the falling
