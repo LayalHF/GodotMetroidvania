@@ -13,5 +13,11 @@ JetBrains Rider
 - The character can do several movements like glide, grab on the ledge, jump, slide, attack and use equipments.
 - The character can interact with surrounds like open a chest, door, shoot enemies, recieve damage, break walls and so on.
 
+**Controls:**\
+- Movement Direction: WASD
+- Glide: Left Shift
+- Slide: Alt
+- Jump: Space
+
 Current Assets used from 'rvross' on itch.io (https://rvros.itch.io/animated-pixel-hero). \
 PS: I am planning to create my own assets after I finish and polish the prototype :]
