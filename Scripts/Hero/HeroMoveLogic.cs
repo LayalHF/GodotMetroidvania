@@ -150,6 +150,13 @@ namespace MetroidvaniaProject.Scripts.Hero
         {
             if (!GravityDisabled)
             {
+                // if current state is glide 
+                if (Hero.CurrentState == Hero.StateGlide)
+                {
+                    Velocity.y += Hero.StateGlide.GliderGravity * delta;        // apply the glider gravity
+                    return;
+                }
+                
                 // apply gravity to the hero
                 Velocity.y += Gravity * delta;
             }

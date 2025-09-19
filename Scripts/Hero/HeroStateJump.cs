@@ -27,7 +27,14 @@ namespace MetroidvaniaProject.Scripts.Hero
                 // return the falling state
                 return hero.StateFall;
             }
-
+            // if the glide action is pressed
+            if (Input.IsActionJustPressed("Glide"))
+            {
+                hero.HeroAnimations.Play("HeroFall");       // so it looks like the hero is holding the glider
+                hero.HeroEquipment.Glider.OpenGlider();
+                return hero.StateGlide;
+            }
+            
             if (!hero.IsOnFloor())
             {
                 if (hero.HeroMoveLogic.Velocity.y < 0)

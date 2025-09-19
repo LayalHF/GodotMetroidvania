@@ -13,15 +13,16 @@ namespace MetroidvaniaProject.Scripts.Hero
         public HeroStateSliderStandUp StateSlideStandUp = new HeroStateSliderStandUp(); // the slide stand up state
         public HeroStateLedgeGrab StateLedgeGrab = new HeroStateLedgeGrab(); // the ledge-grab state
         public HeroStateLedgeClimb StateLedgeClimb = new HeroStateLedgeClimb(); // the ledge-climb state
+        public HeroStateGlide StateGlide = new HeroStateGlide(); // the Glide state
 
         
         public HeroMoveLogic HeroMoveLogic;
         public HeroCollisionShapes HeroCollisionShapes;
         public HeroTimers HeroTimers;
         public Hero2DRayCast HeroRaycasts;
-
+        public HeroEquipment HeroEquipment;
         public AnimatedSprite HeroAnimations; // The Hero Animations
-        private IHeroState CurrentState; // The current state the Hero is in
+        public IHeroState CurrentState; // The current state the Hero is in
         private bool IsInitialized = false; // Boolean to keep track of if the state machine is properly initialized
         public bool IsMoving = false; // to keep track if the Hero is moving
 
@@ -57,6 +58,12 @@ namespace MetroidvaniaProject.Scripts.Hero
             }
             
             HeroRaycasts = new Hero2DRayCast(this, ref initOk);
+            if (!initOk)
+            {
+                return false;
+            }
+
+            HeroEquipment = new HeroEquipment(this, ref initOk);
             if (!initOk)
             {
                 return false;

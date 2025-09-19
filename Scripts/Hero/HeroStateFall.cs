@@ -1,3 +1,5 @@
+using Godot;
+
 namespace MetroidvaniaProject.Scripts.Hero
 {
    public class HeroStateFall : IHeroState
@@ -19,6 +21,13 @@ namespace MetroidvaniaProject.Scripts.Hero
          {
             return hero.StateLedgeGrab;
          }
+         // if the glide action is pressed
+         if (Input.IsActionJustPressed("Glide"))
+         {
+             hero.HeroEquipment.Glider.OpenGlider();
+             return hero.StateGlide;
+         }
+         
          // if the hero is landing on the ground/floor
          if(hero.IsOnFloor())
          {
