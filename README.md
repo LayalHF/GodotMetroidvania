@@ -13,6 +13,12 @@ JetBrains Rider
 - The character can do several movements like glide, grab on the ledge, jump, slide, attack and use equipments.
 - The character can interact with surrounds like open a chest, door, shoot enemies, recieve damage, break walls and so on.
 
+## How to Play?
+
+1. open Godot editor
+2. Start the Main scene
+
+
 **Controls:**
 - Movement Direction: WASD
 - Glide: Left Shift
