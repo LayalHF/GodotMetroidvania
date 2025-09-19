@@ -2,7 +2,7 @@
 
 Welcome to the Godot metroidvania prototype project using C# programming.\
 The goal of this prototype is for me to practice C# programming and Object Oriented design patterns.
-It's for learning purposes only and the prototype code/design/art is subjected to change along the learning process.
+It's for learning purposes only and the prototype code/design/art is subjected to change along the process.
 
 **Setup:**\
 Godot .Net version 3.x\
