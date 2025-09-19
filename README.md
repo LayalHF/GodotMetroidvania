@@ -13,7 +13,7 @@ JetBrains Rider
 - The character can do several movements like glide, grab on the ledge, jump, slide, attack and use equipments.
 - The character can interact with surrounds like open a chest, door, shoot enemies, recieve damage, break walls and so on.
 
-**Controls:**\
+**Controls:**
 - Movement Direction: WASD
 - Glide: Left Shift
 - Slide: Alt
