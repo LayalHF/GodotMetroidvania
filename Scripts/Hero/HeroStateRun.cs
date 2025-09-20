@@ -14,14 +14,26 @@ namespace MetroidvaniaProject.Scripts.Hero
             // Set the animation hero to run
             hero.HeroAnimations.Play("HeroRun");
 
+            if (Input.IsActionJustPressed("Slide"))
+            {
+                return hero.StateSlide;
+            }
+            
             if (Input.IsActionJustPressed("Jump"))
             {
                 return hero.StateInitJump;
             }
             
+            if (Input.IsActionJustPressed("Attack"))
+            {
+                return hero.StateAttack;
+            }
+            
             // if the hero is not on the ground or floor
             if (!hero.IsOnFloor())
             {
+                // state the coyote time jump timer
+                hero.StateFall.HeroPassedOverAnEdgeStartCoyoteTimeTimer(hero);
                 // set state to falling
                 return hero.StateFall;
             }

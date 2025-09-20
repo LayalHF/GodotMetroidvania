@@ -16,6 +16,8 @@ namespace MetroidvaniaProject.Scripts.Hero
       
       public Timer AttackTimer;    // timer for standard attack durations
       
+      public Timer CoyoteTimeTimer;    // timer for coyote time duration
+
       private bool TimersInitialized;     // flag to keep track of if the timers have been properly initialized
 
       public HeroTimers(HeroStateMachine hero, ref bool initOk)
@@ -52,6 +54,12 @@ namespace MetroidvaniaProject.Scripts.Hero
          }
          
          AttackTimer = GetTimerNode("AttackTimer");
+         if(!TimersInitialized)
+         {
+            return false;
+         }
+         
+         CoyoteTimeTimer = GetTimerNode("CoyoteTimer");
          if(!TimersInitialized)
          {
             return false;

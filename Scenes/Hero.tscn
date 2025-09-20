@@ -266,7 +266,7 @@ position = Vector2( -1, 2.5 )
 shape = SubResource( 1 )
 
 [node name="CollisionShapeSlide" type="CollisionShape2D" parent="."]
-position = Vector2( 3, 11.75 )
+position = Vector2( 2, 10.5 )
 shape = SubResource( 30 )
 disabled = true
 
@@ -303,6 +303,10 @@ wait_time = 0.9
 
 [node name="AttackTimer" type="Timer" parent="Timers"]
 wait_time = 0.2
+
+[node name="CoyoteTimer" type="Timer" parent="Timers"]
+wait_time = 0.12
+one_shot = true
 
 [node name="RayCasts" type="Node2D" parent="."]
 

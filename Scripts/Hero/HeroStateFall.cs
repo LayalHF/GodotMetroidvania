@@ -2,66 +2,89 @@ using Godot;
 
 namespace MetroidvaniaProject.Scripts.Hero
 {
-   public class HeroStateFall : IHeroState
+   public class HeroStateFall : Timer, IHeroState
    {
+      private bool Initialized = false;
+      private bool CoyoteTimeTimerHasTimedOut = false;      // if the coyote timer has timedout
+      public bool CanCoyoteTimeJump = false;    // if the hero can perform a coyote time jump
+      private HeroStateMachine Hero;      // the hero state machine
+      
       public IHeroState DoState(HeroStateMachine hero, float deltatime)
       {
+         InitState(hero);     // initialize the state
          return Fall(hero, deltatime);
       }
 
+      private void InitState(HeroStateMachine hero)
+      {
+         if (!Initialized)
+         {
+            Initialized = true;
+            Hero = hero;
+
+            Hero.HeroTimers.CoyoteTimeTimer.Connect("timeout", this, nameof(OnCoyoteTimeTimerTimeout));
+         }
+      }
+
+      private void OnCoyoteTimeTimerTimeout()
+      {
+         CanCoyoteTimeJump =  false;
+      }
       private IHeroState Fall(HeroStateMachine hero, float deltatime)
       {
          // Enable Snapping so the Hero will be able to walk on slopes
-         hero.HeroMoveLogic.EnableSnap();
+         Hero.HeroMoveLogic.EnableSnap();
       
-         hero.HeroAnimations.Play("HeroFall");
+         Hero.HeroAnimations.Play("HeroFall");
          
          // if the attack action is pressed
          if (Input.IsActionJustPressed("Attack"))
          {
-            return hero.StateAttack;
+            return Hero.StateAttack;
          }
          
          // if hero is falling next to a ledge
-         if (hero.StateLedgeGrab.CanHeroLedgeGrab(hero))
+         if (Hero.StateLedgeGrab.CanHeroLedgeGrab(Hero))
          {
-            return hero.StateLedgeGrab;
+            return Hero.StateLedgeGrab;
          }
          // if the glide action is pressed
          if (Input.IsActionJustPressed("Glide"))
          {
-             hero.HeroEquipment.Glider.OpenGlider();
-             return hero.StateGlide;
+            Hero.HeroEquipment.Glider.OpenGlider();
+             return Hero.StateGlide;
          }
          
          // if the hero is landing on the ground/floor
-         if(hero.IsOnFloor())
+         if(Hero.IsOnFloor())
          {
-            hero.StateJump.ResetJumpCounter();
+            Hero.StateJump.ResetJumpCounter();
             
             // if the hero is moving
-            if (hero.HeroMoveLogic.IsMoving)
+            if (Hero.HeroMoveLogic.IsMoving)
             {
-               return hero.StateRun;
+               return Hero.StateRun;
             }
             // if not, return the idle state
-            return hero.StateIdle;
+            return Hero.StateIdle;
          }
          
          if (Input.IsActionJustPressed("Jump"))
          {
-            if (hero.StateJump.CanWallJump(hero))
+            if (CanCoyoteTimeJump || Hero.StateJump.CanWallJump(Hero) || Hero.StateJump.CanJumpAgainInAir())
             {
-               return hero.StateInitJump;
-            }
-            if (hero.StateJump.CanJumpAgainInAir())
-            {
-               return hero.StateInitJump;   
+               CanCoyoteTimeJump = false;
+               return Hero.StateInitJump;
             }
          }
-         
          // if no other state was triggered, continue the falling
-         return hero.StateFall;
+         return Hero.StateFall;
+      }
+
+      public void HeroPassedOverAnEdgeStartCoyoteTimeTimer(HeroStateMachine hero)
+      {
+         hero.StateFall.CanCoyoteTimeJump = false;
+         hero.HeroTimers.CoyoteTimeTimer.Start();
       }
    }
 }
