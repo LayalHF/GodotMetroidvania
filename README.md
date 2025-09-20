@@ -24,6 +24,7 @@ JetBrains Rider
 - Glide: Left Shift
 - Slide: Alt
 - Jump: Space
+- Attack: Ctrl
 
 
 Current Assets used from 'rvross' on itch.io (https://rvros.itch.io/animated-pixel-hero). \
