@@ -7,9 +7,8 @@
 [sub_resource type="RectangleShape2D" id=29]
 extents = Vector2( 3.8125, 1.875 )
 
-[sub_resource type="CapsuleShape2D" id=1]
-radius = 9.5
-height = 10.0
+[sub_resource type="RectangleShape2D" id=50]
+extents = Vector2( 10, 13.5 )
 
 [sub_resource type="RectangleShape2D" id=30]
 extents = Vector2( 11, 5.75 )
@@ -258,12 +257,12 @@ scale = Vector2( 2, 2 )
 script = ExtResource( 2 )
 
 [node name="CollisionShapeHead" type="CollisionShape2D" parent="."]
-position = Vector2( 0.5, -8.5 )
+position = Vector2( -0.5, -8 )
 shape = SubResource( 29 )
 
 [node name="CollisionShapeBody" type="CollisionShape2D" parent="."]
-position = Vector2( -1, 2.5 )
-shape = SubResource( 1 )
+position = Vector2( -1, 4 )
+shape = SubResource( 50 )
 
 [node name="CollisionShapeSlide" type="CollisionShape2D" parent="."]
 position = Vector2( 2, 10.5 )
@@ -273,8 +272,7 @@ disabled = true
 [node name="HeroAnimations" type="AnimatedSprite" parent="."]
 position = Vector2( -0.5, 0 )
 frames = SubResource( 6 )
-animation = "HeroAttackInAir"
-frame = 2
+animation = "HeroIdle"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
@@ -311,24 +309,47 @@ one_shot = true
 [node name="RayCasts" type="Node2D" parent="."]
 
 [node name="LedgeGrabRayCastTileAbove" type="RayCast2D" parent="RayCasts"]
-position = Vector2( 0.5, -15.5 )
+position = Vector2( 0.5, -17 )
 enabled = true
 cast_to = Vector2( 19, 0 )
 
 [node name="LedgeGrabRayCastTileHead" type="RayCast2D" parent="RayCasts"]
-position = Vector2( 0.5, -11 )
+position = Vector2( 0.5, -12.5 )
 enabled = true
 cast_to = Vector2( 12, 0 )
 
 [node name="LeftWallRayCast" type="RayCast2D" parent="RayCasts"]
-position = Vector2( -11, 10 )
+position = Vector2( -11.5, 10 )
 enabled = true
 cast_to = Vector2( -8, 0 )
 
 [node name="RightWallRayCast" type="RayCast2D" parent="RayCasts"]
-position = Vector2( 9, 10 )
+position = Vector2( 9.5, 10 )
 enabled = true
 cast_to = Vector2( 8, 0 )
+
+[node name="JumpBufferRayCast" type="RayCast2D" parent="RayCasts"]
+position = Vector2( -1, 18 )
+enabled = true
+cast_to = Vector2( 0, 15 )
+
+[node name="CornerCorrectionLeftRayCast" type="RayCast2D" parent="RayCasts"]
+position = Vector2( -11, -10 )
+rotation = 3.14159
+enabled = true
+cast_to = Vector2( 0, 15 )
+
+[node name="CornerCorrectionMiddleRayCast" type="RayCast2D" parent="RayCasts"]
+position = Vector2( -1, -10 )
+rotation = 3.14159
+enabled = true
+cast_to = Vector2( 0, 15 )
+
+[node name="CornerCorrectionRightRayCast" type="RayCast2D" parent="RayCasts"]
+position = Vector2( 8.5, -10 )
+rotation = 3.14159
+enabled = true
+cast_to = Vector2( 0, 15 )
 
 [node name="Equipment" type="Node2D" parent="."]
 

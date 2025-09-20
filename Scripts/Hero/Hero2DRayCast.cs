@@ -10,6 +10,10 @@ namespace MetroidvaniaProject.Scripts.Hero
         public RayCast2D LedgeGrabRayCastTileHead;      // The raycast to check if a tile is next to the head
         public RayCast2D LeftWallRayCast;     // The raycast to check if there is a wall to the left
         public RayCast2D RightWallRayCast;      // The raycast to check if there is a wall to the right
+        public RayCast2D JumpBufferRayCast;      // The raycast to check if the player can perform a jump-buffered jump
+        public RayCast2D CornerCorrectionLeftRayCast;      
+        public RayCast2D CornerCorrectionMiddleRayCast;     
+        public RayCast2D CornerCorrectionRightRayCast;     
 
         public Hero2DRayCast(HeroStateMachine hero, ref bool initOk)
         {
@@ -42,6 +46,31 @@ namespace MetroidvaniaProject.Scripts.Hero
             {
                 return false;
             }
+            
+            JumpBufferRayCast = GetRaycastNode("JumpBufferRayCast");
+            if (!RaycastsInitialized)
+            {
+                return false;
+            }
+            
+            CornerCorrectionLeftRayCast = GetRaycastNode("CornerCorrectionLeftRayCast");
+            if (!RaycastsInitialized)
+            {
+                return false;
+            }
+            
+            CornerCorrectionMiddleRayCast = GetRaycastNode("CornerCorrectionMiddleRayCast");
+            if (!RaycastsInitialized)
+            {
+                return false;
+            }
+            
+            CornerCorrectionRightRayCast = GetRaycastNode("CornerCorrectionRightRayCast");
+            if (!RaycastsInitialized)
+            {
+                return false;
+            }
+            
             return true;
         }
         

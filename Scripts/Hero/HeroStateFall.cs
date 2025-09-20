@@ -71,7 +71,10 @@ namespace MetroidvaniaProject.Scripts.Hero
          
          if (Input.IsActionJustPressed("Jump"))
          {
-            if (CanCoyoteTimeJump || Hero.StateJump.CanWallJump(Hero) || Hero.StateJump.CanJumpAgainInAir())
+            if (CanCoyoteTimeJump 
+                || Hero.StateJump.CanHeroJumpBufferJump(Hero)
+                || Hero.StateJump.CanWallJump(Hero) 
+                || Hero.StateJump.CanJumpAgainInAir())
             {
                CanCoyoteTimeJump = false;
                return Hero.StateInitJump;
@@ -83,7 +86,7 @@ namespace MetroidvaniaProject.Scripts.Hero
 
       public void HeroPassedOverAnEdgeStartCoyoteTimeTimer(HeroStateMachine hero)
       {
-         hero.StateFall.CanCoyoteTimeJump = false;
+         hero.StateFall.CanCoyoteTimeJump = true;
          hero.HeroTimers.CoyoteTimeTimer.Start();
       }
    }

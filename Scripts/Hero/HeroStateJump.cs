@@ -44,13 +44,17 @@ namespace MetroidvaniaProject.Scripts.Hero
                 return hero.StateAttack;
             }
             
+            // if hero is not on the ground or floor
             if (!hero.IsOnFloor())
             {
+                // going upwards
                 if (hero.HeroMoveLogic.Velocity.y < 0)
                 {
+                    // corner correct the jump if needed
+                    CornerCorrectTheJump(hero, deltatime);
                     return hero.StateJump;
                 }
-
+                // falling
                 if (hero.HeroMoveLogic.Velocity.y > 0)
                 {
                     return hero.StateFall;
@@ -101,6 +105,41 @@ namespace MetroidvaniaProject.Scripts.Hero
             }
             return false;
         }
-   
+
+        public bool CanHeroJumpBufferJump(HeroStateMachine hero)
+        {
+            // if hero is not on the floor & the jump buffer raycast is colliding & the hero is falling
+            if (!hero.IsOnFloor() && hero.HeroRaycasts.JumpBufferRayCast.IsColliding() &&
+                hero.HeroMoveLogic.Velocity.y > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public void CornerCorrectTheJump(HeroStateMachine hero, float delta)
+        {
+            // if the left raycast is colliding, but not the middle one
+            if (hero.HeroRaycasts.CornerCorrectionLeftRayCast.IsColliding()
+                && !hero.HeroRaycasts.CornerCorrectionMiddleRayCast.IsColliding())
+            {  
+                // if the hero is not next to the wall - checked by making sure that the head ray is not colliding
+                if (!hero.HeroRaycasts.LedgeGrabRayCastTileHead.IsColliding())
+                {
+                    hero.Translate(new Vector2(400*delta,0));
+                }
+            }
+            // if the right raycast is colliding, but not the middle one
+            if (hero.HeroRaycasts.CornerCorrectionRightRayCast.IsColliding()
+                && !hero.HeroRaycasts.CornerCorrectionMiddleRayCast.IsColliding())
+            {
+                if (!hero.HeroRaycasts.LedgeGrabRayCastTileHead.IsColliding())
+                {
+                    hero.Translate(new Vector2(-400*delta,0));
+                }
+            }
+            
+            
+        }
     }
 }
