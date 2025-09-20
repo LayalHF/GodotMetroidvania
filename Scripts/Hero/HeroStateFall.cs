@@ -15,7 +15,13 @@ namespace MetroidvaniaProject.Scripts.Hero
          hero.HeroMoveLogic.EnableSnap();
       
          hero.HeroAnimations.Play("HeroFall");
-
+         
+         // if the attack action is pressed
+         if (Input.IsActionJustPressed("Attack"))
+         {
+            return hero.StateAttack;
+         }
+         
          // if hero is falling next to a ledge
          if (hero.StateLedgeGrab.CanHeroLedgeGrab(hero))
          {

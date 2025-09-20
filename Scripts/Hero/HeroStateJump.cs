@@ -38,6 +38,12 @@ namespace MetroidvaniaProject.Scripts.Hero
                 return hero.StateGlide;
             }
             
+            // if the attack action is pressed
+            if (Input.IsActionJustPressed("Attack"))
+            {
+                return hero.StateAttack;
+            }
+            
             if (!hero.IsOnFloor())
             {
                 if (hero.HeroMoveLogic.Velocity.y < 0)

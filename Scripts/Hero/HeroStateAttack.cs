@@ -44,6 +44,13 @@ public class HeroStateAttack : Timer, IHeroState
         {
             PlayAttackAnimation("HeroAttack");
         }
+        // hero is in the air
+        else if (!Hero.IsOnFloor())
+        {
+            PlayAttackAnimation("HeroAttackInAir");
+
+        }
+        
         // if attack timer has timed out
         if (AttackTimerHasTimedOut)
         {
